@@ -35,10 +35,10 @@ export const register= async(req, res)=>{
 
     } catch (error) {
         res.status(500).json({
-            message: "Server error",
-            success: false,
-            error: error.message,
-            });
+        message: "Server error",
+        success: false,
+        error: error.message,
+        });
     }
 }
 
