@@ -1,4 +1,3 @@
-// controllers/scanController.js
 import axios from "axios";
 import { ScanHistory } from "../models/scanHistory.model";
 

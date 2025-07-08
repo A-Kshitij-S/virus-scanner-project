@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import connectDb from "./utils/db.js";
 // import scanRoutes from "./routes/scan.js";
+import userRoutes from "./routes/user.route.js"
 
 dotenv.config({});
 
@@ -18,8 +19,8 @@ const corsOption={
     credentials:true
 }
 app.use(cors(corsOption));
-
-// app.use("/api/scan", scanRoutes);
+ 
+app.use("/api/v1/user", userRoutes)
 
 const PORT = process.env.PORT || 9696;
 

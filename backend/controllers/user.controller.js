@@ -1,8 +1,8 @@
-import { User } from "../models/user.model";
+import { User } from "../models/user.model.js";
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 
-export const register= async()=>{
+export const register= async(req, res)=>{
     try {
         const {name, email, password}= req.body
 
@@ -34,7 +34,11 @@ export const register= async()=>{
         })
 
     } catch (error) {
-        res.status(500).json({ msg: "Server error", error: err.message });
+        res.status(500).json({
+            message: "Server error",
+            success: false,
+            error: error.message,
+            });
     }
 }
 
