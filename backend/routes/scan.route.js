@@ -1,13 +1,22 @@
-import express from "express"
-import { scanFile } from "../controllers/scan.controller"
-import { verifyToken } from "../middleware/authMiddleware"
-import multer from "multer"
+import express from "express";
+import multer from "multer";
+import { getScanHistory, scanFile, scanUrl } from "../controllers/scan.controller.js";
+import {verifyToken} from "../middleware/authMiddleware.js"
 
-const router= express.Router()
+const router = express.Router();
 
-const storage= multer.memoryStorage()
-const upload= multer({storage:storage})
+const storage = multer.memoryStorage();
 
-router.post("/file", verifyToken, upload.single("file") ,scanFile)
+const upload = multer({
+  storage,
+  limits: {
+    fileSize: 10 * 1024 * 1024, // 5MB max
+  },
+});
 
-export default router
+router.post("/url", verifyToken, scanUrl);
+router.post("/file", verifyToken, upload.single("file"), scanFile);
+router.get("/history", verifyToken, getScanHistory)
+
+
+export default router;
