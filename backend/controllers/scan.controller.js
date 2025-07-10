@@ -62,15 +62,13 @@ export const scanFile = async (req, res) => {
   }
 };
 
-
-
 export const getScanHistory = async (req, res) => {
   try {
     const userId = req.userId;
 
     const history = await ScanHistory.find({ userId })
-      .sort({ createdAt: -1 }) 
-      .select("fileName urlName scanResult createdAt"); 
+      .sort({ createdAt: -1 })
+      .select("fileName urlName scanResult createdAt");
 
     res.status(200).json({
       message: "Scan history fetched successfully",
@@ -85,8 +83,6 @@ export const getScanHistory = async (req, res) => {
     });
   }
 };
-
-
 
 export const scanUrl = async (req, res) => {
   try {
@@ -145,4 +141,36 @@ export const scanUrl = async (req, res) => {
   }
 };
 
+export const clearScanHistory = async (req, res) => {
+  try {
+    const userId = req.userId;
+    await ScanHistory.deleteMany({ userId });
+    res.status(200).json({
+      message: "Scan history cleared successfully.",
+      success: false,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to clear history",
+      error,
+      success: false,
+    });
+  }
+};
 
+export const deleteScanResult = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const scanId = req.params.id;
+
+    const result = await ScanHistory.findOneAndDelete({ _id: scanId, userId });
+
+    if (!result) {
+      return res.status(404).json({ message: "Scan result not found" });
+    }
+
+    res.status(200).json({ message: "Scan result deleted successfully." });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to delete scan result", error });
+  }
+};
