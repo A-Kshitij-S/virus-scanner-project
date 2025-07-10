@@ -1,6 +1,9 @@
 import axios from "axios";
 import FormData from "form-data";
 import { ScanHistory } from "../models/scanHistory.model.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export const scanFile = async (req, res) => {
   try {
@@ -11,12 +14,14 @@ export const scanFile = async (req, res) => {
       return res.status(400).json({ message: "No file uploaded" });
     }
 
-    // Create form-data payload
+    console.log("Uploading file to VT:", file.originalname);
+
+    // Step 1: Prepare form-data
     const form = new FormData();
     form.append("file", file.buffer, file.originalname);
 
-    // POST to VirusTotal
-    const response = await axios.post(
+    // Step 2: Upload to VirusTotal
+    const vtUpload = await axios.post(
       "https://www.virustotal.com/api/v3/files",
       form,
       {
@@ -28,20 +33,24 @@ export const scanFile = async (req, res) => {
       }
     );
 
-    const analysisId = response.data.data.id;
+    const analysisId = vtUpload.data.data.id;
+    console.log("Analysis ID:", analysisId);
 
-    // Optional: add delay if needed
+    // Step 3: Wait and fetch result
     await new Promise((resolve) => setTimeout(resolve, 4000));
 
     const resultResp = await axios.get(
       `https://www.virustotal.com/api/v3/analyses/${analysisId}`,
       {
-        headers: { "x-apikey": process.env.VIRUSTOTAL_API_KEY },
+        headers: {
+          "x-apikey": process.env.VIRUSTOTAL_API_KEY,
+        },
       }
     );
 
     const verdict = resultResp.data.data.attributes.stats;
 
+    // Step 4: Save to DB
     await ScanHistory.create({
       userId,
       fileName: file.originalname,
@@ -55,12 +64,16 @@ export const scanFile = async (req, res) => {
       success: true,
     });
   } catch (err) {
+    console.error("Scan File Error:", err?.response?.data || err.message);
     res.status(500).json({
-      message: "Scan failed",
-      error: err.message,
+      message: "File scan failed",
+      error: err?.message,
     });
   }
 };
+
+
+
 
 export const getScanHistory = async (req, res) => {
   try {
@@ -84,6 +97,7 @@ export const getScanHistory = async (req, res) => {
   }
 };
 
+
 export const scanUrl = async (req, res) => {
   try {
     const userId = req.userId;
@@ -93,7 +107,7 @@ export const scanUrl = async (req, res) => {
       return res.status(400).json({ message: "No URL provided" });
     }
 
-    // 1. Submit the URL to VirusTotal for scanning
+    // Step 1: Submit the URL to VirusTotal
     const submission = await axios.post(
       "https://www.virustotal.com/api/v3/urls",
       new URLSearchParams({ url: targetUrl }).toString(),
@@ -105,41 +119,46 @@ export const scanUrl = async (req, res) => {
       }
     );
 
-    const analysisId = submission.data.data.id;
+    // Step 2: Encode the URL to get its ID for verdict fetch
+    const encodedUrl = Buffer.from(targetUrl).toString("base64").replace(/=+$/, "");
 
-    // 2. Wait a few seconds (optional, for result to process)
-    await new Promise((r) => setTimeout(r, 4000));
+    // Optional delay before fetching verdict
+    await new Promise((resolve) => setTimeout(resolve, 4000));
 
-    // 3. Fetch analysis result
-    const resultResp = await axios.get(
-      `https://www.virustotal.com/api/v3/analyses/${analysisId}`,
+    // Step 3: Fetch the final verdict from /urls/:encodedUrl
+    const verdictRes = await axios.get(
+      `https://www.virustotal.com/api/v3/urls/${encodedUrl}`,
       {
-        headers: { "x-apikey": process.env.VIRUSTOTAL_API_KEY },
+        headers: {
+          "x-apikey": process.env.VIRUSTOTAL_API_KEY,
+        },
       }
     );
 
-    const verdict = resultResp.data.data.attributes.stats;
+    const verdict = verdictRes.data.data.attributes.last_analysis_stats;
 
-    // 4. Save to DB (only urlName, not fileName)
+    // Step 4: Save result to DB
     await ScanHistory.create({
       userId,
       urlName: targetUrl,
       scanResult: JSON.stringify(verdict),
     });
 
-    res.status(200).json({
+    return res.status(200).json({
       url: targetUrl,
       verdict,
       message: "URL scan successful",
       success: true,
     });
   } catch (err) {
-    res.status(500).json({
+    console.error("Scan URL Error:", err.message);
+    return res.status(500).json({
       message: "URL scan failed",
       error: err.message,
     });
   }
 };
+
 
 export const clearScanHistory = async (req, res) => {
   try {

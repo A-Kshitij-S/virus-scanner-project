@@ -2,7 +2,8 @@ import SignUp from '../pages/SignUp'
 import Home from '../pages/Home'
 import Login from '../pages/Login'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-
+import Scan from "../pages/Scan"
+import History from '../pages/History'
 
 const appRouter= createBrowserRouter([
   {
@@ -16,6 +17,14 @@ const appRouter= createBrowserRouter([
   {
     path:"/signup",
     element: <SignUp/>
+  },
+  {
+    path:"/scan",
+    element: <Scan/>
+  },
+  {
+    path:"/history",
+    element: <History/>
   }
 ])
 
