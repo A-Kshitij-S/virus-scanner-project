@@ -34,7 +34,7 @@ export const scanFile = async (req, res) => {
     );
 
     const analysisId = vtUpload.data.data.id;
-    console.log("Analysis ID:", analysisId);
+    // console.log("Analysis ID:", analysisId);
 
     // Step 3: Wait and fetch result
     await new Promise((resolve) => setTimeout(resolve, 4000));
