@@ -68,6 +68,7 @@ export const scanFile = async (req, res) => {
     res.status(500).json({
       message: "File scan failed",
       error: err?.message,
+      success:false
     });
   }
 };
@@ -155,6 +156,7 @@ export const scanUrl = async (req, res) => {
     return res.status(500).json({
       message: "URL scan failed",
       error: err.message,
+      success:false
     });
   }
 };
@@ -185,11 +187,11 @@ export const deleteScanResult = async (req, res) => {
     const result = await ScanHistory.findOneAndDelete({ _id: scanId, userId });
 
     if (!result) {
-      return res.status(404).json({ message: "Scan result not found" });
+      return res.status(404).json({ message: "Scan result not found", success:false });
     }
 
-    res.status(200).json({ message: "Scan result deleted successfully." });
+    res.status(200).json({ message: "Scan result deleted successfully.", success:true });
   } catch (error) {
-    res.status(500).json({ message: "Failed to delete scan result", error });
+    res.status(500).json({ message: "Failed to delete scan result", error, success:false });
   }
 };
