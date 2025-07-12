@@ -1,4 +1,4 @@
-## 🔍 About This Project
+## About This Project
 
 **Virex** is a minimal and modern malware scanning web application that uses the **VirusTotal API** to scan files and URLs.
 
