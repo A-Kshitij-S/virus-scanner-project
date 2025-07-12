@@ -14,7 +14,7 @@ export const scanFile = async (req, res) => {
       return res.status(400).json({ message: "No file uploaded" });
     }
 
-    console.log("Uploading file to VT:", file.originalname);
+    // console.log("Uploading file to VT:", file.originalname);
 
     // Step 1: Prepare form-data
     const form = new FormData();
