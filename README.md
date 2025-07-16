@@ -1,5 +1,11 @@
 # Virex - Virus and URL Scanner
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![React](https://img.shields.io/badge/Frontend-React-blue)](https://reactjs.org/)
+[![Node.js](https://img.shields.io/badge/Backend-Node.js-yellowgreen)](https://nodejs.org/)
+[![MongoDB](https://img.shields.io/badge/Database-MongoDB-brightgreen)](https://www.mongodb.com/)
+[![VirusTotal API](https://img.shields.io/badge/API-VirusTotal-blueviolet)](https://www.virustotal.com/)
+
 **Virex** is a minimal and modern malware scanning web application that uses the VirusTotal API to scan files and URLs for potential threats. This project demonstrates secure API integration, full-stack development, and clean user interface design.
 
 ## Features
@@ -89,11 +95,11 @@ This project uses the [VirusTotal Public API v3](https://developers.virustotal.c
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).  
+You are free to use, modify, and distribute this software as long as the license terms are met.
 
 ## Notes
 
 - This project is built for educational and demonstration purposes only.
 - You must have a VirusTotal API key to use scanning features.
 - File contents are not stored—only metadata (filename and results) is saved in the scan history.
-
