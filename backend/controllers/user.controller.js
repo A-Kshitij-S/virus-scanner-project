@@ -95,20 +95,20 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-    res
-      .clearCookie("token", {
-        httpOnly: true,
-        secure: true,
-        sameSite: "None", // MUST match what was used in login
-      })
-      .status(200)
-      .json({ message: "Logged out successfully", success: true });
+    res.clearCookie("token", {
+      httpOnly: true,
+      sameSite: "None",  // must be 'None' if you're using secure: true
+      secure: true,
+    });
+
+    return res.status(200).json({ message: "Logged out successfully", success: true });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       message: "Logout failed",
       error: error.message,
       success: false,
     });
   }
 };
+
 
