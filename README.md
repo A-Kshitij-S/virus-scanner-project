@@ -8,14 +8,18 @@
 
 **Virex** is a minimal and modern malware scanning web application that uses the VirusTotal API to scan files and URLs for potential threats. This project demonstrates secure API integration, full-stack development, and clean user interface design.
 
+## Live Links
+
+- Frontend: [https://virus-scanner-project.onrender.com](https://virus-scanner-project.onrender.com)
+- Backend: [https://virus-scanner-backend.onrender.com](https://virus-scanner-backend.onrender.com)
+
 ## Features
 
 - File and URL scanning using the VirusTotal API  
-- Detailed scan results with verdict breakdown from multiple antivirus engines  
-- Scan history with options to clear or delete entries  
+- Detailed scan results with verdict breakdown from TotalVirus antivirus engines  
+- Scan history with options to clear or delete history of scans  
 - Secure login and registration system (JWT-based)  
-- Dark theme with a fully responsive UI  
-- Role-based access handled on the frontend  
+- Blueish theme with a fully responsive UI   
 
 ## Tech Stack
 
@@ -36,18 +40,18 @@
 ## Installation and Setup
 
 1. Clone the repository
-   ```
+   ```bash
    git clone https://github.com/your-username/virex-virus-scanner.git
    cd virex-virus-scanner
    ```
 
 2. Setup the backend
-   ```
+   ```bash
    cd backend
    npm install
    ```
 
-3. Create a `.env` file in the backend directory with the following
+3. Create a `.env` file in the backend directory
    ```
    MONGO_URI=your_mongodb_connection_string
    JWT_SECRET=your_jwt_secret
@@ -55,12 +59,12 @@
    ```
 
 4. Start the backend server
-   ```
+   ```bash
    npm start
    ```
 
 5. Setup the frontend
-   ```
+   ```bash
    cd ../frontend
    npm install
    npm run dev
@@ -90,6 +94,7 @@ virex-virus-scanner/
 ## API Integration
 
 This project uses the [VirusTotal Public API v3](https://developers.virustotal.com/reference/overview) for:
+
 - File scanning via file upload
 - URL scanning and report fetching
 
