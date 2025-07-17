@@ -15,7 +15,7 @@ app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
 
 const corsOption={
-    origin: "https://virus-scanner-project.onrender.com",
+    origin: "https://virus-scanner-project.onrender.com",//it is my frontend url
     credentials:true
 }
 app.use(cors(corsOption));
