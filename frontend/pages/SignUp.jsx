@@ -97,7 +97,7 @@ const Login = () => {
                             type="submit"
                             className="w-full mt-4 bg-[#2C74B3] hover:bg-[#205295] text-white font-medium transition-all duration-200"
                         >
-                            {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Login"}
+                            {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Sign Up"}
                         </Button>
 
                         <p className="text-sm text-white mt-2">
