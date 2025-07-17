@@ -74,8 +74,8 @@ export const login = async (req, res) => {
     res
       .cookie("token", token, {
         httpOnly: true,
-        secure: false,
-        sameSite: "Lax",
+        secure: true,
+        sameSite: "None",
         maxAge: 24 * 60 * 60 * 1000,
       })
       .status(200)
@@ -98,8 +98,8 @@ export const logout = async (req, res) => {
     res
       .clearCookie("token", {
         httpOnly: true,
-        sameSite: "lax",
-        secure: false, // set true if using HTTPS
+        secure: true,
+        sameSite: "None", // MUST match what was used in login
       })
       .status(200)
       .json({ message: "Logged out successfully", success: true });
@@ -111,3 +111,4 @@ export const logout = async (req, res) => {
     });
   }
 };
+
