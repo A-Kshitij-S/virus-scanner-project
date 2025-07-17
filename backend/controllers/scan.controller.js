@@ -16,11 +16,11 @@ export const scanFile = async (req, res) => {
 
     // console.log("Uploading file to VT:", file.originalname);
 
-    // Step 1: Prepare form-data
+    
     const form = new FormData();
     form.append("file", file.buffer, file.originalname);
 
-    // Step 2: Upload to VirusTotal
+    
     const vtUpload = await axios.post(
       "https://www.virustotal.com/api/v3/files",
       form,
@@ -34,9 +34,9 @@ export const scanFile = async (req, res) => {
     );
 
     const analysisId = vtUpload.data.data.id;
-    // console.log("Analysis ID:", analysisId);
+    
 
-    // Step 3: Wait and fetch result
+    
     await new Promise((resolve) => setTimeout(resolve, 4000));
 
     const resultResp = await axios.get(
@@ -50,7 +50,7 @@ export const scanFile = async (req, res) => {
 
     const verdict = resultResp.data.data.attributes.stats;
 
-    // Step 4: Save to DB
+    
     await ScanHistory.create({
       userId,
       fileName: file.originalname,
@@ -86,7 +86,7 @@ export const scanUrl = async (req, res) => {
       return res.status(400).json({ message: "No URL provided" });
     }
 
-    // Step 1: Submit the URL to VirusTotal
+    
     const submission = await axios.post(
       "https://www.virustotal.com/api/v3/urls",
       new URLSearchParams({ url: targetUrl }).toString(),
@@ -98,13 +98,13 @@ export const scanUrl = async (req, res) => {
       }
     );
 
-    // Step 2: Encode the URL to get its ID for verdict fetch
+    
     const encodedUrl = Buffer.from(targetUrl).toString("base64").replace(/=+$/, "");
 
-    // Optional delay before fetching verdict
+    
     await new Promise((resolve) => setTimeout(resolve, 4000));
 
-    // Step 3: Fetch the final verdict from /urls/:encodedUrl
+    
     const verdictRes = await axios.get(
       `https://www.virustotal.com/api/v3/urls/${encodedUrl}`,
       {
@@ -116,7 +116,7 @@ export const scanUrl = async (req, res) => {
 
     const verdict = verdictRes.data.data.attributes.last_analysis_stats;
 
-    // Step 4: Save result to DB
+    
     await ScanHistory.create({
       userId,
       urlName: targetUrl,
