@@ -14,10 +14,13 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
 
-const corsOption={
-    origin: "https://virus-scanner-project.onrender.com",//it is my frontend url
-    credentials:true
-}
+const corsOption = {
+  origin: "https://virus-scanner-project.onrender.com", // your frontend
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
 app.use(cors(corsOption));
  
 app.use("/api/v1/user", userRoutes)
