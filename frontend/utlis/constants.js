@@ -1,2 +1,2 @@
-export const USER_API_ENDPOINT= "http://localhost:6969/api/v1/user"
-export const SCAN_API_ENDPOINT= "http://localhost:6969/api/v1/scan"
+export const USER_API_ENDPOINT= "https://virus-scanner-backend.onrender.com/api/v1/user"
+export const SCAN_API_ENDPOINT= "https://virus-scanner-backend.onrender.com/api/v1/scan"
