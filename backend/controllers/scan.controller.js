@@ -79,7 +79,7 @@ export const scanUrl = async (req, res) => {
     const userId = req.userId;
     const { targetUrl } = req.body;
 
-    console.log("VT KEY:", process.env.VIRUSTOTAL_API_KEY);
+    // console.log("VT KEY:", process.env.VIRUSTOTAL_API_KEY);
 
 
     if (!targetUrl) {
