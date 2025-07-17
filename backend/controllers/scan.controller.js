@@ -74,35 +74,13 @@ export const scanFile = async (req, res) => {
 };
 
 
-
-
-export const getScanHistory = async (req, res) => {
-  try {
-    const userId = req.userId;
-
-    const history = await ScanHistory.find({ userId })
-      .sort({ createdAt: -1 })
-      .select("fileName urlName scanResult createdAt");
-
-    res.status(200).json({
-      message: "Scan history fetched successfully",
-      success: true,
-      history,
-    });
-  } catch (error) {
-    res.status(500).json({
-      message: "Failed to fetch scan history",
-      success: false,
-      error: error.message,
-    });
-  }
-};
-
-
 export const scanUrl = async (req, res) => {
   try {
     const userId = req.userId;
     const { targetUrl } = req.body;
+
+    console.log("VT KEY:", process.env.VIRUSTOTAL_API_KEY);
+
 
     if (!targetUrl) {
       return res.status(400).json({ message: "No URL provided" });
@@ -160,6 +138,31 @@ export const scanUrl = async (req, res) => {
     });
   }
 };
+
+
+export const getScanHistory = async (req, res) => {
+  try {
+    const userId = req.userId;
+
+    const history = await ScanHistory.find({ userId })
+      .sort({ createdAt: -1 })
+      .select("fileName urlName scanResult createdAt");
+
+    res.status(200).json({
+      message: "Scan history fetched successfully",
+      success: true,
+      history,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to fetch scan history",
+      success: false,
+      error: error.message,
+    });
+  }
+};
+
+
 
 
 export const clearScanHistory = async (req, res) => {
