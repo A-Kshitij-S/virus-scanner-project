@@ -13,6 +13,11 @@
 - Frontend: [https://virus-scanner-project.onrender.com](https://virus-scanner-project.onrender.com)
 - Backend: [https://virus-scanner-backend.onrender.com](https://virus-scanner-backend.onrender.com)
 
+  <img width="1279" height="678" alt="image" src="https://github.com/user-attachments/assets/af676da5-d14b-4428-86bc-22cb891b9c2b" /> <br>
+  
+
+
+
 ## Features
 
 - File and URL scanning using the VirusTotal API  
