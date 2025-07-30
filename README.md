@@ -13,11 +13,11 @@
 - Frontend: [https://virus-scanner-project.onrender.com](https://virus-scanner-project.onrender.com)
 - Backend: [https://virus-scanner-backend.onrender.com](https://virus-scanner-backend.onrender.com)
 
+  <img width="1280" height="671" alt="image" src="https://github.com/user-attachments/assets/490d3995-4f7c-4828-bed3-118431e4b13b" /> <br> <br> 
+  <img width="1289" height="682" alt="image" src="https://github.com/user-attachments/assets/c2829cdf-bf63-4812-b9c5-89bca865cd97" /> <br> <br> 
   <img width="1279" height="678" alt="image" src="https://github.com/user-attachments/assets/af676da5-d14b-4428-86bc-22cb891b9c2b" /> <br> <br>
   <img width="1280" height="677" alt="image" src="https://github.com/user-attachments/assets/5b7d77e2-a79b-42d8-b6ee-f255e6fea04d" /> <br> <br> 
-  <img width="1284" height="679" alt="image" src="https://github.com/user-attachments/assets/7d81f0d7-8a19-43b1-8f5c-d08a4b38fa17" /> <br> <br> 
-<img width="1289" height="682" alt="image" src="https://github.com/user-attachments/assets/c2829cdf-bf63-4812-b9c5-89bca865cd97" /> <br> <br> 
-<img width="1280" height="671" alt="image" src="https://github.com/user-attachments/assets/490d3995-4f7c-4828-bed3-118431e4b13b" />
+  <img width="1284" height="679" alt="image" src="https://github.com/user-attachments/assets/7d81f0d7-8a19-43b1-8f5c-d08a4b38fa17" /> 
 
 
 
